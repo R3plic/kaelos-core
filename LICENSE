@@ -1,0 +1,171 @@
+KAELOSUI SOURCE-AVAILABLE LICENSE
+Version 1.0
+
+Copyright (c) 2026 KaelosUI / Stefan Latuske
+https://github.com/R3plic/kaelos-core
+
+This license governs the software, source code, stylesheets, documentation and
+any accompanying files in this repository (the "Software").
+
+By using, copying, modifying or distributing the Software, you agree to these
+terms. If you do not agree, do not use the Software.
+
+-------------------------------------------------------------------------------
+1. DEFINITIONS
+-------------------------------------------------------------------------------
+
+"You" means the individual or legal entity exercising rights under this license.
+
+"Your Product" means any application, website, service or client deliverable
+built by You that incorporates the Software as a functional part and provides
+substantive functionality of its own beyond the Software.
+
+"Derivative" means any work based on the Software, including modified versions
+and ports to other frameworks, languages or platforms.
+
+"Standalone Offering" means any distribution of the Software or a Derivative
+where the Software is the product being distributed or sold, rather than a part
+of a larger product.
+
+-------------------------------------------------------------------------------
+2. GRANT OF RIGHTS
+-------------------------------------------------------------------------------
+
+Subject to Section 3, You are granted a worldwide, non-exclusive, royalty-free
+license to:
+
+  (a) use, reproduce, modify and merge the Software;
+
+  (b) use the Software commercially, including in Your Product, in paid or
+      ad-supported applications, in software-as-a-service offerings, and in
+      work delivered to clients for payment;
+
+  (c) distribute and sublicense the Software as compiled, bundled or otherwise
+      embedded into Your Product, including to Your end users and clients;
+
+  (d) distribute modified source code of the Software under a different name
+      as part of a fork of Your own product, provided such distribution does
+      not create a Standalone Offering.
+
+No fee, royalty or attribution fee is owed for any use permitted here.
+
+-------------------------------------------------------------------------------
+3. CONDITIONS AND LIMITATIONS
+-------------------------------------------------------------------------------
+
+3.1 Retention of notices.
+    You must keep this license file and all copyright notices intact in every
+    copy of the Software and in any Derivative that You distribute as source.
+
+3.2 No resale of the Software itself.
+    You may not sell, license, sublicense, rent, lease, lend or otherwise
+    monetize the Software or a Derivative as a Standalone Offering. This
+    includes, without limitation, selling or licensing it:
+
+      (a) as a component library, UI kit, design system, icon set, theme,
+          template, starter kit, boilerplate or code snippet library;
+
+      (b) as part of a template marketplace listing, theme store, or asset pack;
+
+      (c) as a paid package on any registry, marketplace or download portal;
+
+      (d) as part of a website builder, page builder, low-code or no-code
+          product whose users obtain the Software's components as reusable
+          building blocks offered by You.
+
+3.3 No repackaging as your own library.
+    You may not rebrand the Software, or a Derivative, and present it as a
+    library, framework, kit or design system of Your own authorship for others
+    to adopt or purchase.
+
+3.4 No extraction-ready redistribution.
+    You may not distribute the Software's source code in a form whose primary
+    purpose or practical effect is to let third parties obtain the Software as
+    a reusable standalone library, even if no payment is involved.
+
+3.5 Clarification — permitted uses.
+    The following are expressly permitted and do not constitute resale:
+
+      (a) charging users for Your Product that contains the Software;
+
+      (b) delivering a website, app or internal tool to a client for a fee,
+          including handing over the project source containing the Software;
+
+      (c) publishing Your Product's own source code publicly (open source or
+          not), provided the Software is not thereby offered as a standalone
+          library and the notices required by Section 3.1 are kept;
+
+      (d) using the Software in an internal tool, prototype or educational
+          project, with or without payment.
+
+-------------------------------------------------------------------------------
+4. TRADEMARKS
+-------------------------------------------------------------------------------
+
+This license grants no rights to the names "KaelosUI" or "Kaelos", or to any
+logo, wordmark or trade dress associated with them. You may state factually that
+Your Product "uses KaelosUI" or is "built with KaelosUI", but You may not imply
+endorsement, sponsorship or affiliation, and You may not use the names as the
+name of a Derivative.
+
+-------------------------------------------------------------------------------
+5. CONTRIBUTIONS
+-------------------------------------------------------------------------------
+
+Unless You explicitly state otherwise, any contribution You intentionally submit
+for inclusion in the Software is licensed under the same terms as this license,
+with no additional conditions.
+
+-------------------------------------------------------------------------------
+6. TERMINATION
+-------------------------------------------------------------------------------
+
+This license terminates automatically, without notice, if You breach any of
+its terms. On termination You must stop all use and distribution of the
+Software and delete all copies in Your possession or control. Sections 3.1, 3.2,
+3.3, 3.4, 4, 7 and 8 survive termination.
+
+A party who cures a breach within 30 days of becoming aware of it may have this
+license reinstated, at the copyright holder's discretion.
+
+-------------------------------------------------------------------------------
+7. NO WARRANTY
+-------------------------------------------------------------------------------
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. THE ENTIRE RISK
+AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH YOU.
+
+-------------------------------------------------------------------------------
+8. LIMITATION OF LIABILITY
+-------------------------------------------------------------------------------
+
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE. THIS INCLUDES, WITHOUT LIMITATION, DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY AND CONSEQUENTIAL DAMAGES, AND LOSS OF PROFITS,
+DATA, BUSINESS OR GOODWILL, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+Where liability cannot be excluded by law, liability is limited to the amount
+You paid for the Software, or EUR 50.00 if You paid nothing.
+
+-------------------------------------------------------------------------------
+9. GENERAL
+-------------------------------------------------------------------------------
+
+If any provision of this license is held unenforceable, the remaining provisions
+remain in full force and effect. This license is the entire agreement concerning
+the Software. It is governed by the laws of the Federal Republic of Germany,
+excluding its conflict-of-law rules and the UN Convention on Contracts for the
+International Sale of Goods.
+
+-------------------------------------------------------------------------------
+10. COMMERCIAL LICENSING
+-------------------------------------------------------------------------------
+
+If You want to do something this license does not permit — for example ship the
+components as part of a UI kit or template product — a separate commercial
+license may be available. Open an issue at
+https://github.com/R3plic/kaelos-core to ask.

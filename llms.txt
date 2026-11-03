@@ -1,0 +1,294 @@
+# KaelosUI (`kaelos-core`)
+
+> Animated, accessible tab bars for React. Six motion variants share one
+> headless, framework-agnostic TypeScript core: measured geometry, real spring
+> physics, CSS-variable theming, zero animation dependencies.
+
+This document is written for an LLM or coding agent that has been asked to add
+KaelosUI to an existing project. Work through it in order. Everything you are
+allowed to import, pass or override is listed here — do not invent component
+names, props or CSS variables.
+
+---
+
+## 0. What ships
+
+- **Plain TypeScript source.** No build output, no bundler config, no runtime
+  dependency. The consumer's bundler compiles it.
+- **One stylesheet**, `src/styles/tabs.css`, exposed as `kaelos-core/styles.css`.
+  It defines only `.tb-*` classes inside `@layer components`, so the host app's
+  own utilities and design tokens still win without specificity fights.
+  Tailwind is **not** required.
+- **Peer dependencies:** `react` and `react-dom` (`>= 18`). Nothing else.
+- **Package exports:**
+
+  | Specifier | Resolves to |
+  | --- | --- |
+  | `kaelos-core` | `src/index.ts` (all components, types and the headless core) |
+  | `kaelos-core/styles.css` | `src/styles/tabs.css` |
+
+---
+
+## 1. Install
+
+The package is **not on npm**. Use the form that matches the project.
+
+```bash
+# Straight from GitHub
+npm install github:R3plic/kaelos-core
+
+# From a local checkout or a sibling directory
+npm install file:../kaelos-core
+
+# Already vendored as a git submodule
+npm install file:./src/components/kaelos-core
+```
+
+### If you do not install it at all (submodule + path alias)
+
+Wire up **both** specifiers — a bare-match alias alone will not resolve
+`kaelos-core/styles.css`:
+
+```ts
+// vite.config.ts
+import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from 'vite'
+
+const core = (p: string) => fileURLToPath(new URL(`./src/components/kaelos-core/${p}`, import.meta.url))
+
+export default defineConfig({
+  resolve: {
+    alias: [
+      { find: '@kaelos/core/styles.css', replacement: core('src/styles/tabs.css') },
+      { find: /^@kaelos\/core$/, replacement: core('src/index.ts') },
+    ],
+  },
+})
+```
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@kaelos/core": ["./src/components/kaelos-core/src/index.ts"],
+      "@kaelos/core/styles.css": ["./src/components/kaelos-core/src/styles/tabs.css"]
+    }
+  }
+}
+```
+
+---
+
+## 2. Import the stylesheet exactly once — required
+
+```ts
+import 'kaelos-core/styles.css'   // or '@kaelos/core/styles.css' when aliased
+```
+
+Put it in the application entry (`main.tsx`, `app/layout.tsx`, `_app.tsx`) or in
+the global stylesheet. Without it the bars render as unstyled text.
+
+If Tailwind v4 is present, order the imports so the component layer comes after
+Tailwind:
+
+```css
+@import 'tailwindcss';
+@import 'kaelos-core/styles.css';
+```
+
+---
+
+## 3. Render a bar
+
+```tsx
+import { WormUnderlineTabs, HomeIcon, SearchIcon, UserIcon } from 'kaelos-core'
+import 'kaelos-core/styles.css'
+
+const items = [
+  { id: 'home', label: 'Home', icon: <HomeIcon /> },
+  { id: 'search', label: 'Search', icon: <SearchIcon /> },
+  { id: 'profile', label: 'Profile', icon: <UserIcon /> },
+]
+
+export function Nav() {
+  return <WormUnderlineTabs items={items} defaultValue="search" ariaLabel="Main" />
+}
+```
+
+---
+
+## 4. Choose a variant
+
+| Component | Renders | Needs per item |
+| --- | --- | --- |
+| `WormUnderlineTabs` | Visible text labels + spring underline | `label`; `icon` optional |
+| `HoppingDotTabs` | Icon rail, dot hops between icons | `icon` (falls back to the label's first letter) |
+| `SpotlightTabs` | Icon rail + pivoting light cone | `icon` (same fallback) |
+| `RippleFillTabs` | Icon rail, ripple fills the tapped tab | `icon` (same fallback) |
+| `JellyIconTabs` | Icon rail, tapped icon squashes | `icon` (same fallback) |
+| `BadgePopTabs` | Icon rail + count badges | `icon`, and `badge` for counts |
+
+`label` is always the accessible name, even when it is not painted. Do not drop
+it: the icon rail variants use it for `aria-label` and for the letter fallback.
+
+---
+
+## 5. Props (identical on all six)
+
+```ts
+interface TabItemSpec {
+  id: string                     // stable identity, used for value/defaultValue and ARIA ids
+  label: string                  // accessible name
+  icon?: ReactNode               // any node: SVG, emoji, avatar
+  badge?: number | string        // consumed by BadgePopTabs
+  disabled?: boolean
+}
+
+interface BaseTabBarProps {
+  items: TabItemSpec[]
+  value?: string                 // controlled active id
+  defaultValue?: string          // uncontrolled initial id
+  onChange?: (item: TabItemSpec, index: number) => void
+  id?: string                    // prefix for ARIA tab/panel ids
+  ariaLabel?: string             // 'Categories' on WormUnderlineTabs, 'Navigation' elsewhere
+  disabled?: boolean
+  loop?: boolean                 // wrap arrow keys at the ends
+  activation?: 'automatic' | 'manual'   // manual = Enter/Space activates
+  withPanels?: boolean           // wires aria-controls to <TabPanel>s
+  className?: string             // tab strip
+  tabClassName?: string
+  activeTabClassName?: string
+  labelClassName?: string
+  iconClassName?: string
+  indicatorClassName?: string
+  style?: CSSProperties          // token overrides, see tabVars below
+}
+```
+
+`WormUnderlineTabs` additionally accepts `showLabels?: boolean` (default `true`;
+when `false` the label becomes screen-reader-only).
+
+Use **either** `value` (controlled) **or** `defaultValue` (uncontrolled), not
+both.
+
+---
+
+## 6. Panels
+
+```tsx
+import { useState } from 'react'
+import { TabPanel, SpotlightTabs } from 'kaelos-core'
+
+const [tab, setTab] = useState('home')
+
+<SpotlightTabs
+  id="app-nav"
+  items={items}
+  value={tab}
+  onChange={(item) => setTab(item.id)}
+  withPanels
+/>
+<TabPanel tabsId="app-nav" value="home">…</TabPanel>
+```
+
+`TabPanel`'s `tabsId` must equal the tab bar's `id`, and `value` must equal a
+`TabItemSpec.id`.
+
+---
+
+## 7. Theming
+
+Every colour, size, radius and spring constant is a CSS custom property. Pass
+them with the typed helper, which keeps `style` type-safe:
+
+```tsx
+import { tabVars } from 'kaelos-core'
+
+<WormUnderlineTabs
+  items={items}
+  style={tabVars({
+    '--tb-accent': '#fb7185',
+    '--tb-bar-bg': '#f6ecdf',
+    '--tb-bar-radius': '15px',
+    '--tb-text': '#2a1c0e',
+  })}
+/>
+```
+
+Shared tokens: `--tb-bar-bg`, `--tb-bar-border`, `--tb-bar-radius`,
+`--tb-bar-padding`, `--tb-bar-shadow`, `--tb-text`, `--tb-text-soft`,
+`--tb-muted`, `--tb-focus`, `--tb-accent`, `--tb-accent-2`, `--tb-tab-height`,
+`--tb-tab-size`, `--tb-tab-font-size`, `--tb-icon-size`, `--tb-ring-color`.
+
+Variant tokens (prefix per variant): `--tb-worm-*`, `--tb-hop-*`, `--tb-spot-*`,
+`--tb-ripple-*`, `--tb-jelly-*`, `--tb-badge-*`. Grep `src/styles/tabs.css` for
+the exact names and defaults before overriding — every declaration has a
+fallback, so an unknown token is silently ignored.
+
+Override per instance with `tabVars({...})`, per subtree with a wrapper class,
+or globally on `:root`.
+
+---
+
+## 8. Icons
+
+Nine ready-made 24×24 stroke icons accept any SVG props (`className`, `size`
+via CSS): `HomeIcon`, `SearchIcon`, `HeartIcon`, `UserIcon`, `BellIcon`,
+`BookmarkIcon`, `CompassIcon`, `SparkIcon`, `GridIcon`. Any `ReactNode` works as
+`icon`, so lucide/react-icons or an `<img>` are equally valid.
+
+---
+
+## 9. Framework notes
+
+- **Vite / esbuild / Bun:** works with no extra config, TS is transpiled from
+  `node_modules` by default.
+- **Next.js:** add `transpilePackages: ['kaelos-core']` to `next.config.*`, and
+  put each component that uses a bar behind `'use client'` (they use hooks,
+  refs and layout effects).
+- **Webpack / Rspack:** if your `babel-loader` rule excludes `node_modules`,
+  widen it to include `kaelos-core`, otherwise the `.tsx` source is not
+  compiled.
+- **Plain CSS consumers:** nothing else to do. No PostCSS plugin, no Tailwind
+  content globs, no runtime JS beyond React.
+
+---
+
+## 10. Gotchas — read before you debug
+
+1. **Missing stylesheet import** is by far the most common failure. The markup
+   is unstyled text and raw icons. Check step 2 first.
+2. **Do not re-implement the motion.** The bars animate by writing CSS
+   variables from one shared rAF loop. Overriding `transform`/`transition` on
+   `.tb-*` internals breaks the engines.
+3. **Reduced motion** is honoured automatically; do not add your own media
+   query around it.
+4. **Rendering is measured.** Bars read `getBoundingClientRect` on mount. If the
+   bar is inside a `display:none` container at mount, it will not animate until
+   it is re-mounted or the layout changes.
+5. **One bar per `id`.** ARIA ids are derived from `id`; duplicates collide.
+6. **Do not fork the CSS.** Override tokens; do not copy `tabs.css` into the app
+   and edit it, or you lose upgradeability.
+
+---
+
+## 11. Verify your integration
+
+- The stylesheet is imported exactly once and the bar has its pill/rail styling.
+- Clicking and arrow-keying changes the active tab, and `onChange` fires.
+- `Tab` moves focus into the bar, arrows move within it, `Enter`/`Space`
+  activates under `activation="manual"`.
+- The bar has `role="tablist"` with one `role="tab"` per item and exactly one
+  `aria-selected="true"`.
+- No console warning about refs, hydration or missing keys.
+
+---
+
+## License
+
+Source-available, **not** open source in the OSI sense. Commercial use inside
+your own products (apps, sites, SaaS, client work) is permitted and free. You may
+not resell, redistribute or sublicense KaelosUI itself — or a derivative of it —
+as a competing library, UI kit, template or theme product. See `LICENSE`.

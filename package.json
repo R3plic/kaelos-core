@@ -1,8 +1,8 @@
 {
   "name": "kaelos-core",
   "version": "1.0.0",
-  "description": "Six animated tab bars on one headless TypeScript core: measured geometry, spring physics and CSS-variable theming. No animation dependencies.",
-  "license": "MIT",
+  "description": "KaelosUI — six animated tab bars on one headless TypeScript core: measured geometry, spring physics and CSS-variable theming. No animation dependencies.",
+  "license": "SEE LICENSE IN LICENSE",
   "type": "module",
   "sideEffects": [
     "*.css"
@@ -17,7 +17,9 @@
   },
   "files": [
     "src",
-    "README.md"
+    "README.md",
+    "LICENSE",
+    "llms.txt"
   ],
   "keywords": [
     "react",
