@@ -9,7 +9,7 @@ real spring physics, CSS-variable theming. No animation library.
 
 ## Set up with an AI agent
 
-This repo ships [`llms.txt`](./llms.txt) — a file written for LLMs and coding
+This repo ships [`llms.txt`](./llms.txt) - a file written for LLMs and coding
 agents that documents every component, prop, CSS variable, framework gotcha and
 verification step. Paste the prompt below into Claude Code, Cursor, Codex,
 Copilot or any agent with file access:
@@ -24,13 +24,13 @@ Set up KaelosUI (kaelos-core) in this project.
 2. Follow it exactly: install the package, import the stylesheet exactly once,
    then replace the existing tab bar (or add a new one) with the variant that
    fits the design best.
-3. Match our current design tokens — theme the bar with the documented CSS
+3. Match our current design tokens - theme the bar with the documented CSS
    variables via tabVars() instead of editing the library's CSS.
 4. Show me the diff, and confirm the checks in the "Verify your integration"
    section before you call it done.
 
 Constraints: React >= 18. Do not invent component names, props or CSS
-variables — only use what llms.txt documents. Do not copy or fork
+variables - only use what llms.txt documents. Do not copy or fork
 src/styles/tabs.css into this project.
 ```
 
@@ -43,7 +43,7 @@ If your agent supports it, point it straight at the file instead of the prompt:
 
 ### 1. Install
 
-The package is not published to npm — install it from GitHub or from a local
+The package is not published to npm - install it from GitHub or from a local
 checkout:
 
 ```bash
@@ -52,7 +52,7 @@ npm install file:../kaelos-core         # from a sibling checkout
 npm install file:./src/components/kaelos-core   # from a git submodule
 ```
 
-Peer dependencies: `react` and `react-dom` (`>= 18`). Nothing else — no
+Peer dependencies: `react` and `react-dom` (`>= 18`). Nothing else - no
 animation library, no CSS-in-JS runtime.
 
 It ships TypeScript source and has no build step, so your bundler compiles it.
@@ -75,7 +75,7 @@ it after Tailwind:
 ```
 
 The stylesheet is plain CSS in `@layer components`, so your utility classes win
-without specificity fights. Tailwind itself is not required — native cascade
+without specificity fights. Tailwind itself is not required - native cascade
 layers are enough.
 
 ### 3. Render a bar
@@ -103,7 +103,7 @@ export function Nav() {
 
 ### Using it as a submodule with a path alias
 
-To skip installation, mount the repo and alias **both** specifiers — a bare-match
+To skip installation, mount the repo and alias **both** specifiers - a bare-match
 alias will not resolve the stylesheet:
 
 ```ts
@@ -193,5 +193,5 @@ npm run typecheck
 **Source-available, free for commercial use, not resellable.** Use KaelosUI in
 your apps, SaaS products, client work and paid products at no cost. You may not
 resell, sublicense or redistribute the library itself (or a derivative of it) as
-a UI kit, template, theme or competing component library — see
+a UI kit, template, theme or competing component library - see
 [LICENSE](./LICENSE) for the exact terms.

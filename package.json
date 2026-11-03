@@ -1,7 +1,7 @@
 {
   "name": "kaelos-core",
   "version": "1.0.0",
-  "description": "KaelosUI — six animated tab bars on one headless TypeScript core: measured geometry, spring physics and CSS-variable theming. No animation dependencies.",
+  "description": "KaelosUI - six animated tab bars on one headless TypeScript core: measured geometry, spring physics and CSS-variable theming. No animation dependencies.",
   "license": "SEE LICENSE IN LICENSE",
   "type": "module",
   "sideEffects": [

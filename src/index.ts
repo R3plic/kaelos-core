@@ -3,7 +3,7 @@
  * -----------
  * Animated tab bars built on one headless, framework-agnostic TypeScript core.
  *
- * Everything public is re-exported from here — nothing needs to reach into
+ * Everything public is re-exported from here - nothing needs to reach into
  * `src/core` or `src/react` directly.
  *
  *   import { WormUnderlineTabs, HoppingDotTabs } from 'kaelos-core'

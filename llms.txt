@@ -6,7 +6,7 @@
 
 This document is written for an LLM or coding agent that has been asked to add
 KaelosUI to an existing project. Work through it in order. Everything you are
-allowed to import, pass or override is listed here — do not invent component
+allowed to import, pass or override is listed here - do not invent component
 names, props or CSS variables.
 
 ---
@@ -46,7 +46,7 @@ npm install file:./src/components/kaelos-core
 
 ### If you do not install it at all (submodule + path alias)
 
-Wire up **both** specifiers — a bare-match alias alone will not resolve
+Wire up **both** specifiers - a bare-match alias alone will not resolve
 `kaelos-core/styles.css`:
 
 ```ts
@@ -81,7 +81,7 @@ export default defineConfig({
 
 ---
 
-## 2. Import the stylesheet exactly once — required
+## 2. Import the stylesheet exactly once - required
 
 ```ts
 import 'kaelos-core/styles.css'   // or '@kaelos/core/styles.css' when aliased
@@ -224,7 +224,7 @@ Shared tokens: `--tb-bar-bg`, `--tb-bar-border`, `--tb-bar-radius`,
 
 Variant tokens (prefix per variant): `--tb-worm-*`, `--tb-hop-*`, `--tb-spot-*`,
 `--tb-ripple-*`, `--tb-jelly-*`, `--tb-badge-*`. Grep `src/styles/tabs.css` for
-the exact names and defaults before overriding — every declaration has a
+the exact names and defaults before overriding - every declaration has a
 fallback, so an unknown token is silently ignored.
 
 Override per instance with `tabVars({...})`, per subtree with a wrapper class,
@@ -256,7 +256,7 @@ via CSS): `HomeIcon`, `SearchIcon`, `HeartIcon`, `UserIcon`, `BellIcon`,
 
 ---
 
-## 10. Gotchas — read before you debug
+## 10. Gotchas - read before you debug
 
 1. **Missing stylesheet import** is by far the most common failure. The markup
    is unstyled text and raw icons. Check step 2 first.
@@ -290,5 +290,5 @@ via CSS): `HomeIcon`, `SearchIcon`, `HeartIcon`, `UserIcon`, `BellIcon`,
 
 Source-available, **not** open source in the OSI sense. Commercial use inside
 your own products (apps, sites, SaaS, client work) is permitted and free. You may
-not resell, redistribute or sublicense KaelosUI itself — or a derivative of it —
+not resell, redistribute or sublicense KaelosUI itself - or a derivative of it -
 as a competing library, UI kit, template or theme product. See `LICENSE`.
